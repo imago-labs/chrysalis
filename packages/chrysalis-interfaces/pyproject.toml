@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chrysalis-interfaces"
+version = "0.1.0"
+description = "Protocol contracts and stub implementations for the Chrysalis accountability platform."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Imago Labs", email = "hello@imagolabs.dev" }]
+keywords = ["ai", "agents", "accountability", "chrysalis", "memoir"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.urls]
+Homepage = "https://github.com/imago-labs/chrysalis"
+Repository = "https://github.com/imago-labs/chrysalis"
+Documentation = "https://github.com/imago-labs/chrysalis/blob/main/ARCHITECTURE.md"
