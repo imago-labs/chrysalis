@@ -8,7 +8,7 @@
 """
 Chrysalis Interfaces
 
-The four Protocol contracts that production implementations must satisfy.
+The Protocol contracts that production implementations must satisfy.
 The open kernel ships stub implementations of each. The closed Chrysalis
 platform ships production implementations.
 
@@ -25,6 +25,11 @@ from chrysalis_interfaces.protocols import (
     CoherenceScore,
     Critic,
     CritiqueResult,
+    InferenceMessage,
+    InferenceResponse,
+    Inferencer,
+    ToolCall,
+    ToolSpec,
     Turn,
     AffectScore,
 )
@@ -36,12 +41,24 @@ from chrysalis_interfaces.stubs import (
     RuleBasedCritic,
 )
 
+# Reference Inferencer adapters are import-on-demand to avoid requiring httpx
+# at import time for users who only need the Protocol contracts.
+
+
+def __getattr__(name: str):
+    if name in ("OllamaInferencer", "VLLMInferencer"):
+        from chrysalis_interfaces import inferencers
+
+        return getattr(inferencers, name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 __all__ = [
     # Interfaces
     "AffectMonitor",
     "Attester",
     "CoherenceMonitor",
     "Critic",
+    "Inferencer",
     # Data classes
     "AffectScore",
     "AttestationReceipt",
@@ -49,10 +66,17 @@ __all__ = [
     "Chain",
     "CoherenceScore",
     "CritiqueResult",
+    "InferenceMessage",
+    "InferenceResponse",
+    "ToolCall",
+    "ToolSpec",
     "Turn",
     # Stubs
     "NoOpAffectMonitor",
     "LocalLogAttester",
     "NoOpCoherenceMonitor",
     "RuleBasedCritic",
+    # Reference Inferencers (lazy-imported, need httpx)
+    "OllamaInferencer",
+    "VLLMInferencer",
 ]

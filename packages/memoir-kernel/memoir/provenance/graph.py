@@ -18,7 +18,6 @@ this to survive process restarts and be queryable efficiently.
 
 from __future__ import annotations
 
-import json
 import os
 import sqlite3
 from contextlib import contextmanager

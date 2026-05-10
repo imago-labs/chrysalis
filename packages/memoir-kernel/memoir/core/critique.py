@@ -82,7 +82,7 @@ def _build_critique_prompt(
     existing_memories: Optional[str] = None,
 ) -> str:
     parts = [
-        f"## Proposed Memory Entry",
+        "## Proposed Memory Entry",
         f"Key: {entry.key}",
         f"Content: {entry.content}",
         f"Epistemic tag (classifier): {epistemic_tag.value}",

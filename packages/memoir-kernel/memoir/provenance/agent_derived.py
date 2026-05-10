@@ -25,7 +25,6 @@ from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from memoir.models.memory import BQSScore, EpistemicTag
 
 
 # Each handoff between agents reduces BQS by this factor

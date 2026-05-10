@@ -18,10 +18,10 @@ and welcomed. The kernel will compose them automatically.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
-from typing import Protocol, runtime_checkable
+from typing import Any, Protocol, runtime_checkable
 
 
 # ---------------------------------------------------------------------------
@@ -163,3 +163,107 @@ class Attester(Protocol):
     """
 
     def attest(self, payload: bytes, chain: Chain) -> AttestationReceipt: ...
+
+
+# ---------------------------------------------------------------------------
+# Inferencer: model-backend abstraction.
+#
+# Chrysalis is model agnostic by design. Any code that needs to generate text
+# from an LLM goes through this Protocol instead of a vendor SDK. Switching
+# from Anthropic to a local Ollama or vLLM server is a one-line dependency
+# swap, not a refactor.
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class InferenceMessage:
+    """A single message in an inference request.
+
+    role is one of: "system", "user", "assistant", "tool". Some backends
+    fold system messages into a separate field; the Inferencer implementation
+    handles that translation.
+    """
+
+    role: str
+    content: str
+    name: str | None = None
+    tool_call_id: str | None = None
+
+
+@dataclass(frozen=True)
+class ToolSpec:
+    """A tool the model may invoke.
+
+    parameters is a JSON Schema dict describing the tool's input shape.
+    Backends translate this to whatever schema format they require.
+    """
+
+    name: str
+    description: str
+    parameters: dict
+
+
+@dataclass(frozen=True)
+class ToolCall:
+    """A tool invocation the model wants the host to execute."""
+
+    id: str
+    name: str
+    arguments: dict
+
+
+@dataclass(frozen=True)
+class InferenceResponse:
+    """The output of an Inferencer.complete call.
+
+    text is the assistant message content. tool_calls is non-empty when the
+    model wants the host to run one or more tools. stop_reason mirrors the
+    underlying backend's stop reason ("end_turn", "tool_use", "max_tokens",
+    etc.) so the agent loop can decide what to do next.
+    """
+
+    text: str
+    tool_calls: list[ToolCall] = field(default_factory=list)
+    stop_reason: str = "end_turn"
+    model: str = ""
+    usage: dict = field(default_factory=dict)
+    raw: Any | None = None
+
+
+@runtime_checkable
+class Inferencer(Protocol):
+    """
+    Generates text completions from a sequence of messages.
+
+    The Inferencer is the single seam between the Chrysalis agent loop and
+    the underlying model. Implementations are free to talk to any backend:
+    cloud API, local server, or in-process model.
+
+    Implementations shipped or planned:
+      - AnthropicInferencer (chrysalis-platform): Claude via the official SDK.
+      - OpenAIInferencer (chrysalis-platform): OpenAI chat completions.
+      - BedrockInferencer (chrysalis-platform): AWS Bedrock, for compliance use.
+      - OllamaInferencer (this repo): local Ollama server, default for dev.
+      - VLLMInferencer (this repo): vLLM OpenAI-compatible endpoint, for prod GPU.
+      - Custom (any third-party adapter)
+
+    Contract:
+      - complete is async. Implementations that wrap sync SDKs should run them
+        in a thread pool internally.
+      - tools may be empty. If non-empty, the implementation must surface any
+        tool calls the model emits via the tool_calls field on the response.
+      - The implementation must not retry on its own. The agent loop owns retry.
+    """
+
+    model: str
+
+    async def complete(
+        self,
+        messages: list[InferenceMessage],
+        *,
+        system: str | None = None,
+        tools: list[ToolSpec] | None = None,
+        max_tokens: int = 4096,
+        temperature: float = 1.0,
+        stop_sequences: list[str] | None = None,
+    ) -> InferenceResponse: ...

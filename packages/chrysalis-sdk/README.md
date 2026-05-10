@@ -1,35 +1,61 @@
 # chrysalis-sdk
 
-Client SDKs for the Chrysalis Cloud API and self-hosted Chrysalis deployments.
+Developer SDK for the Chrysalis platform. Async Python client for validating beliefs, querying the audit log, and streaming governance events from any application.
 
-## What this package contains
-
-- **Python SDK.** Async client with typed responses for every Memoir kernel operation.
-- **TypeScript SDK.** Browser and Node-compatible client with full type coverage.
+Works against Chrysalis Cloud at api.chrysalis.dev and any self-hosted Chrysalis deployment that speaks the same HTTP API.
 
 ## Install
 
 ```bash
-# Coming with first alpha release.
-pip install chrysalis-sdk          # Python
-npm install @chrysalis/sdk         # TypeScript
+pip install chrysalis-sdk
 ```
 
-## Quick example (Python)
+Python 3.11+.
+
+## Quick start
 
 ```python
 from chrysalis_sdk import ChrysalisClient
 
-client = ChrysalisClient(api_key="...", base_url="https://api.chrysalis.dev")
+async with ChrysalisClient(
+    base_url="https://api.chrysalis.dev",
+    api_key="sk-...",
+) as client:
+    # Validate a belief through the MEMOIR pipeline.
+    result = await client.beliefs.validate(
+        session_id="conv_xyz",
+        key="user_preference",
+        content="The user prefers brevity over depth.",
+        source_reference="conv_xyz turn 14",
+    )
+    print(result.approved, result.epistemic_tag, result.critique_verdict)
 
-result = await client.beliefs.validate(
-    agent_id="agent_abc",
-    content="The user prefers brevity over depth.",
-    source_context="conv_xyz turn 14",
-)
+    # Query the audit log.
+    records = await client.audit.list(session_id="conv_xyz", limit=20)
 
-print(result.committed, result.belief_quality_score)
+    # Stream governance events in real time.
+    async for event in client.events.stream(session_id="conv_xyz"):
+        print(event.type, event.key, event.epistemic_tag)
 ```
+
+## Resources
+
+| Namespace | Methods |
+|---|---|
+| `client.beliefs` | `validate`, `verify`, `list` |
+| `client.audit` | `list`, `session_summary`, `trust_score` |
+| `client.agent` | `chat` |
+| `client.events` | `stream` (SSE) |
+| `client.health` | health check (no auth) |
+
+## Configuration
+
+| Argument | Notes |
+|---|---|
+| `base_url` | API root URL. Required. |
+| `api_key` | Sent as `X-API-Key` header on every request. Required unless the deployment runs with `CHRYSALIS_AUTH_REQUIRED=0`. |
+| `timeout` | Request timeout in seconds. Default 30. |
+| `client` | Optional preconfigured `httpx.AsyncClient` to share a connection pool. |
 
 ## License
 

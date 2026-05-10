@@ -21,7 +21,6 @@ as additional context.
 from __future__ import annotations
 
 import re
-from typing import Optional
 
 from memoir.models.memory import (
     AuditRecord,

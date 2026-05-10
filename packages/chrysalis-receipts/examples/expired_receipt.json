@@ -1,0 +1,22 @@
+{
+  "version": "1",
+  "issuer": "did:chrysalis:imago-labs",
+  "subject": {
+    "agent_id": "agent_demo",
+    "identity_hash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "audit_log_range": {
+    "merkle_root": "0x7126659023315971df0aca3b4c96213215bd43e076d91ccfc8cf993fbb1cc36a",
+    "from_index": 0,
+    "to_index": 1
+  },
+  "issued_at": "2026-05-01T12:00:00Z",
+  "expires_at": "2026-05-01T13:00:00Z",
+  "anchors": [
+    {
+      "chain": "local",
+      "tx": "local-0"
+    }
+  ],
+  "signature": "0x59b8137e53972cbfbca8d8d2cf6c63928c5fab9714925dc4b50b744e9a9fe415c6bb75b99339b6073e7d73527c4afa87abbc24139be5920c34c6a5b537856e0f"
+}

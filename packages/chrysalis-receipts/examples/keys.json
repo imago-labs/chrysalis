@@ -1,0 +1,4 @@
+{
+  "note": "Test-only keypair used to sign the example receipts. Do not reuse outside verifier tests.",
+  "public_key_hex": "b8ab4cc5d179ad79daab71161bc3fb5273b2ba3a6598709c569bb7c98f5f958a"
+}

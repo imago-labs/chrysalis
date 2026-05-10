@@ -3,27 +3,32 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "chrysalis-interfaces"
+name = "chrysalis-sdk"
 version = "0.1.0"
-description = "Protocol contracts and stub implementations for the Chrysalis accountability platform."
+description = "Developer SDK for the Chrysalis accountability platform. Validate beliefs, query audit logs, and stream governance events from any Python application."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
 authors = [{ name = "Imago Labs", email = "hello@imagolabs.dev" }]
-keywords = ["ai", "agents", "accountability", "chrysalis", "memoir"]
+keywords = ["ai", "agents", "governance", "memory", "chrysalis", "memoir"]
 classifiers = [
     "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
+dependencies = [
+    "httpx>=0.27.0",
+    "pydantic>=2.9.0",
+]
 
 [project.optional-dependencies]
-# Required by OllamaInferencer and VLLMInferencer reference adapters.
-inference = [
-    "httpx>=0.27.0",
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
 ]
 
 [project.urls]

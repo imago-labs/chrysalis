@@ -160,7 +160,7 @@ class MEMOIRPipeline:
         message_map = {
             "WRITE_APPROVED": f"Memory write approved. Tag: {tag.value}.",
             "WRITE_FLAGGED": f"Memory write approved with flag. Review recommended. Tag: {tag.value}.",
-            "WRITE_REJECTED": f"Memory write BLOCKED. Critique found contradictions or plausibility issues.",
+            "WRITE_REJECTED": "Memory write BLOCKED. Critique found contradictions or plausibility issues.",
         }
 
         return ValidationResult(

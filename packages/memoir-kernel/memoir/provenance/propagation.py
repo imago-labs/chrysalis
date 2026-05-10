@@ -21,11 +21,10 @@ side-effect-free.
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from memoir.provenance.graph import DerivationEdge, DerivationGraph
+from memoir.provenance.graph import DerivationGraph
 
 
 class PropagationEvent(BaseModel):
