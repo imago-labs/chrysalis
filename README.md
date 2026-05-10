@@ -1,6 +1,7 @@
 # Chrysalis
 
-> **Belief-Level Governance for Autonomous AI Agents**
+> **The accountability layer for autonomous AI.**
+> Memory, oversight, and on-chain provenance for the agentic economy.
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-pre--alpha-orange.svg)](#status)
@@ -107,7 +108,7 @@ release. To follow progress, watch this repo or join the discussions tab.
 Chrysalis is built and maintained by **[Imago Labs](https://github.com/imago-labs)**,
 the research lab of Metamorphic Curations LLC.
 
-Founder: [Crystal Molnar](https://github.com/Msmetamorphosis) — researcher
+Founder: [Crystal Tubbs](https://github.com/Msmetamorphosis) — researcher
 in agent accountability and on-chain provenance. MSAI, June 2026.
 
 ---

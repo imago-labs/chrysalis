@@ -240,4 +240,4 @@ For Imago Labs:
 
 *This document is the canonical architecture reference for the Chrysalis
 platform. It will be kept in sync with the codebase as modules ship. Updates
-should be reviewed by Crystal Molnar (Imago Labs) before merging.*
+should be reviewed by Crystal Tubbs (Imago Labs) before merging.*
