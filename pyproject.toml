@@ -51,4 +51,4 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["packages/memoir-kernel", "packages/chrysalis-interfaces"]
+packages = ["packages/memoir-kernel/memoir", "packages/chrysalis-interfaces/chrysalis_interfaces"]
