@@ -94,11 +94,14 @@ Founded by [Crystal Tubbs](https://github.com/Msmetamorphosis).
 
 ---
 
-## License
+## License and governance
 
 Apache License 2.0. See [`LICENSE`](./LICENSE) for the full text.
 
-"Chrysalis" is a trademark of Imago Labs / Metamorphic Curations LLC. See [`TRADEMARK.md`](./TRADEMARK.md) for permitted uses (coming with first alpha).
+- [`LICENSING.md`](./LICENSING.md): what is open, what is closed, and how the two relate.
+- [`TRADEMARK.md`](./TRADEMARK.md): what you can and cannot do with the Chrysalis name and marks.
+- [`CONTRIBUTOR_LICENSE_AGREEMENT.md`](./CONTRIBUTOR_LICENSE_AGREEMENT.md): terms for code contributions.
+- [`SECURITY.md`](./SECURITY.md): how to report a vulnerability.
 
 ---
 
