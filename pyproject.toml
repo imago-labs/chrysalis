@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
 authors = [
-  { name = "Imago Labs", email = "hello@imagolabs.dev" },
+  { name = "Crystal Tubbs", email = "onmybutterflyjourney@gmail.com" },
 ]
 keywords = ["ai", "agents", "memory", "governance", "observability", "mcp", "solana", "blockchain", "chrysalis"]
 classifiers = [
@@ -51,9 +51,10 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
+# chrysalis-kernel ships only the memoir-kernel content. The sibling
+# packages (chrysalis-interfaces, chrysalis-sdk, chrysalis-receipts)
+# are published as separate PyPI distributions from their own
+# pyproject.toml files under packages/<name>/.
 packages = [
   "packages/memoir-kernel/memoir",
-  "packages/chrysalis-interfaces/chrysalis_interfaces",
-  "packages/chrysalis-sdk/chrysalis_sdk",
-  "packages/chrysalis-receipts/chrysalis_receipts",
 ]

@@ -9,10 +9,11 @@ description = "Protocol contracts and stub implementations for the Chrysalis acc
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
-authors = [{ name = "Imago Labs", email = "hello@imagolabs.dev" }]
+authors = [{ name = "Crystal Tubbs", email = "onmybutterflyjourney@gmail.com" }]
 keywords = ["ai", "agents", "accountability", "chrysalis", "memoir"]
 classifiers = [
     "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
@@ -21,12 +22,14 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-# Required by OllamaInferencer and VLLMInferencer reference adapters.
 inference = [
     "httpx>=0.27.0",
 ]
 
 [project.urls]
-Homepage = "https://github.com/imago-labs/chrysalis"
+Homepage = "https://github.com/imago-labs/chrysalis/tree/main/packages/chrysalis-interfaces"
 Repository = "https://github.com/imago-labs/chrysalis"
 Documentation = "https://github.com/imago-labs/chrysalis/blob/main/ARCHITECTURE.md"
+
+[tool.setuptools.packages.find]
+include = ["chrysalis_interfaces*"]
