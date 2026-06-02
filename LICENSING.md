@@ -50,4 +50,4 @@ By submitting a pull request to this repository, you agree to the terms in [CONT
 
 ## Questions
 
-For licensing questions, commercial inquiries, or trademark usage, contact hello@imagolabs.dev.
+For licensing questions, commercial inquiries, or trademark usage, contact crystal@metamorphiccurations.com.
