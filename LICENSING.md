@@ -31,7 +31,7 @@ The closed platform includes:
 
 These modules are All Rights Reserved, © 2026 Imago Labs / Metamorphic Curations LLC. They are consumed by the open kernel only through the Protocol interface contracts in `packages/chrysalis-interfaces/`. The open kernel ships safe rule-based and no-op stubs that satisfy those contracts so the kernel remains fully functional on its own.
 
-If you want commercial access to the closed platform, contact hello@imagolabs.dev.
+If you want commercial access to the closed platform, contact crystal@metamorphiccurations.com.
 
 ## Aletheia
 
